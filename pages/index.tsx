@@ -6,6 +6,7 @@ import { Flex } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import styles from "../styles/Home.module.css";
 import ConditionGroup from "../src/features/ConditionGroup";
+import AddConditionGroup from "../src/features/AddConditionGroup";
 import { getSurveys } from "../src/queries/getSurveys";
 import { getOperations } from "../src/queries/getOperations";
 import { surveysAtom, currentSurveyAtom } from "../src/store/surveys";
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
       {conditionGroups?.map((conditionGroup, i) => {
         return <ConditionGroup key={i} conditionGroup={conditionGroup} />;
       })}
+      <AddConditionGroup />
     </Flex>
   );
 };

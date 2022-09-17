@@ -1,6 +1,7 @@
 import { atom, useAtom, useSetAtom, useAtomValue } from "jotai";
 import type { PrimitiveAtom, Atom, WritableAtom } from "jotai";
 import { SurveyDetails } from "./surveys";
+import { v4 as uuidv4 } from "uuid";
 
 export interface YieldManager {
   id: string | undefined;
@@ -20,14 +21,17 @@ export interface Operation {
 export interface Conditions {}
 
 export interface ConditionInterface {
+  id?: string;
   data_field: string;
   operator: Operation;
   filter_value: string;
-  filter_end_value: string;
+  filter_end_value?: string;
 }
 
 export interface ConditionGroupInterface {
+  id?: string;
   conditions: ConditionInterface[];
+  childrenMatchType: string;
   survey: SurveyDetails | null;
 }
 
@@ -36,6 +40,8 @@ export const operationsAtom = atom<Operation[] | null>(null);
 export const dataFieldAtom = atom<string | null>(null);
 export const conditionGroupsAtom = atom<ConditionGroupInterface[] | null>([
   {
+    id: uuidv4(),
+    childrenMatchType: 'and',
     conditions: [
       {
         data_field: "age",
