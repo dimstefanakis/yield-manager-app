@@ -2,22 +2,24 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import styles from "../styles/Home.module.css";
 import ConditionGroup from "../src/features/ConditionGroup";
 import AddConditionGroup from "../src/features/AddConditionGroup";
+import Save from "../src/features/Save";
 import { getSurveys } from "../src/queries/getSurveys";
 import { getOperations } from "../src/queries/getOperations";
+import useReadsAs from "../src/hooks/useReadsAs";
 import { surveysAtom, currentSurveyAtom } from "../src/store/surveys";
 import { operationsAtom, conditionGroupsAtom } from "../src/store/yieldManager";
 import SurveySelector from "../src/features/SurveySelector";
 
-const Home: NextPage = () => {
+const Home = () => {
   const [surveys, setSurveyAtom] = useAtom(surveysAtom);
   const [currentSurvey, setCurrentSurvey] = useAtom(currentSurveyAtom);
   const [operations, setOperations] = useAtom(operationsAtom);
   const [conditionGroups, setConditionGroups] = useAtom(conditionGroupsAtom);
+  // const readsAs = useReadsAs();
 
   async function fetchSurveys() {
     const data = await getSurveys();
@@ -41,6 +43,8 @@ const Home: NextPage = () => {
         return <ConditionGroup key={i} conditionGroup={conditionGroup} />;
       })}
       <AddConditionGroup />
+      <Save />
+      {/* <Text m={10} fontSize="xl">{readsAs}</Text> */}
     </Flex>
   );
 };

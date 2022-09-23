@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Button } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { conditionGroupsAtom } from "../../store/yieldManager";
 import { v4 as uuidv4 } from "uuid";
@@ -31,11 +31,9 @@ function AddConditionGroup() {
 
   console.log("conditionGroups", conditionGroups);
   return (
-    <IconButton
-      aria-label="Add new condition group"
-      icon={<AddIcon />}
-      onClick={addConditionGroup}
-    />
+    <Button mx={10} aria-label="Add new condition group" onClick={addConditionGroup}>
+      Add new condition group
+    </Button>
   );
 }
 

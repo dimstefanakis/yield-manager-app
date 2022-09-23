@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Select } from "@chakra-ui/react";
+import { Select, Flex, Heading, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { surveysAtom, currentSurveyAtom } from "../../store/surveys";
 import { yieldManagerAtom } from "../../store/yieldManager";
@@ -34,15 +34,16 @@ function SurveySelector() {
     }
   }, [surveys]);
 
-  console.log("yi4ldManager", yieldManager);
   return (
-    <Select onChange={onChange}>
-      {surveys.map((survey) => (
-        <option key={survey.id} value={survey.id}>
-          {survey.name}
-        </option>
-      ))}
-    </Select>
+    <Flex flexFlow="column" m={10} mb={0}>
+      <Select size="lg" onChange={onChange}>
+        {surveys.map((survey) => (
+          <option key={survey.id} value={survey.id}>
+            {survey.name}
+          </option>
+        ))}
+      </Select>
+    </Flex>
   );
 }
 
