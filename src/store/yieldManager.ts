@@ -26,6 +26,8 @@ export interface ConditionInterface {
   operator: Operation;
   filter_value: string;
   filter_end_value?: string;
+  type: 'survey' | 'profile';
+  survey?: string;
 }
 
 export interface ConditionGroupInterface {
@@ -41,7 +43,7 @@ export const dataFieldAtom = atom<string | null>(null);
 export const conditionGroupsAtom = atom<ConditionGroupInterface[] | null>([
   {
     id: uuidv4(),
-    childrenMatchType: 'and',
+    childrenMatchType: "and",
     conditions: [
       {
         data_field: "age",
@@ -51,6 +53,8 @@ export const conditionGroupsAtom = atom<ConditionGroupInterface[] | null>([
         },
         filter_value: "18",
         filter_end_value: "18",
+        type: "survey",
+        survey: "survey1",
       },
     ],
     survey: null,

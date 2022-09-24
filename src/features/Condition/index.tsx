@@ -1,5 +1,6 @@
 import { Input, Select, HStack, VStack } from "@chakra-ui/react";
 import { useAtom } from "jotai";
+import ConditionType from "../ConditionType";
 import {
   conditionGroupsAtom,
   operationsAtom,
@@ -66,6 +67,7 @@ function Condition({ condition }: { condition: ConditionInterface }) {
 
   return (
     <HStack>
+      <ConditionType condition={condition} />
       <Input value={condition.data_field} onChange={onChangeDataField}></Input>
       <Select value={condition.operator.value} onChange={onChangeOperator}>
         {operations?.map((operator) => {

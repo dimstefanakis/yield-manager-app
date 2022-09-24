@@ -12,6 +12,7 @@ import Condition from "../Condition";
 import {
   conditionGroupsAtom,
   ConditionGroupInterface,
+  ConditionInterface
 } from "../../store/yieldManager";
 import { v4 as uuidv4 } from "uuid";
 
@@ -23,13 +24,14 @@ function ConditionGroup({
   const [conditionGroups, setConditionGroups] = useAtom(conditionGroupsAtom);
 
   function addNewCondition() {
-    const newCondition = {
+    const newCondition: ConditionInterface = {
       id: uuidv4(),
       data_field: "",
       operator: {
         value: "eq",
         label: "Equals",
       },
+      type: 'survey',
       filter_value: "",
     };
     const updatedConditionGroups = conditionGroups?.map((group, i) => {

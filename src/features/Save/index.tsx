@@ -38,7 +38,7 @@ function Save() {
   }
 
   return (
-    <Flex>
+    <Flex justifyContent="center" my={10}>
       <Button onClick={handleSave}>Save</Button>
     </Flex>
   );
