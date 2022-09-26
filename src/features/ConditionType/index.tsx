@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { Flex, Input, Select } from "@chakra-ui/react";
+import { Flex, Input, Select, Text } from "@chakra-ui/react";
 import {
   conditionGroupsAtom,
   ConditionInterface,
@@ -28,10 +28,13 @@ function ConditionType({ condition }: { condition: ConditionInterface }) {
   }
 
   return (
-    <Select w="fit-content" placeholder="Filter based on" onChange={onChange}>
-      <option value="profile">Users profile</option>
-      <option value="survey_js_answer">An answer to a survey</option>
-    </Select>
+    <Flex alignItems="center">
+      <Text>Filter based on</Text>
+      <Select mx="4" w="150px" onChange={onChange}>
+        <option value="profile">Users profile</option>
+        <option value="survey_js_answer">An answer to a survey</option>
+      </Select>
+    </Flex>
   );
 }
 

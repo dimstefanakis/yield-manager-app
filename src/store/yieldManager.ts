@@ -26,7 +26,7 @@ export interface ConditionInterface {
   operator: Operation;
   filter_value: string;
   filter_end_value?: string;
-  type: 'survey' | 'profile';
+  type: 'survey_js_answer' | 'profile';
   survey?: string;
 }
 
@@ -53,7 +53,7 @@ export const conditionGroupsAtom = atom<ConditionGroupInterface[] | null>([
         },
         filter_value: "18",
         filter_end_value: "18",
-        type: "survey",
+        type: "survey_js_answer",
         survey: "survey1",
       },
     ],

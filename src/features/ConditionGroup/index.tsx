@@ -31,7 +31,7 @@ function ConditionGroup({
         value: "eq",
         label: "Equals",
       },
-      type: 'survey',
+      type: "survey_js_answer",
       filter_value: "",
     };
     const updatedConditionGroups = conditionGroups?.map((group, i) => {

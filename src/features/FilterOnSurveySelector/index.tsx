@@ -37,7 +37,7 @@ function FilterOnSurveySelector({
   }
 
   return (
-    <Select onChange={onChange}>
+    <Select onChange={onChange} w="200px">
       {surveys.map((survey: any) => (
         <option key={survey.id} value={survey.id}>
           {survey.name}

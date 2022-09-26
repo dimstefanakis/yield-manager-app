@@ -1,6 +1,9 @@
-import { Input, Select, HStack, VStack } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { Input, Select, Flex, HStack, VStack } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import ConditionType from "../ConditionType";
+import FilterOnSurveySelector from "../FilterOnSurveySelector";
+import Autocomplete from "../../flat/Autocomplete";
 import {
   conditionGroupsAtom,
   operationsAtom,
@@ -10,6 +13,16 @@ import {
 function Condition({ condition }: { condition: ConditionInterface }) {
   const [conditionGroups, setConditionGroups] = useAtom(conditionGroupsAtom);
   const [operations, setOperations] = useAtom(operationsAtom);
+  const [options, setOptions] = useState<string[]>([]);
+
+  useEffect(()=>{
+    if(condition.type === 'survey_js_answer'){
+      const survey = condition.survey;
+      if(survey){
+        
+      }
+    }
+  }, [condition])
 
   function onChangeDataField(e: any) {
     const updatedConditionGroups = conditionGroups?.map((group) => {
@@ -66,10 +79,23 @@ function Condition({ condition }: { condition: ConditionInterface }) {
   }
 
   return (
-    <HStack>
+    <Flex w="100%">
       <ConditionType condition={condition} />
-      <Input value={condition.data_field} onChange={onChangeDataField}></Input>
-      <Select value={condition.operator.value} onChange={onChangeOperator}>
+      {condition.type === "survey_js_answer" && (
+        <FilterOnSurveySelector condition={condition} />
+      )}
+      <Input
+        mx="4"
+        w="150px"
+        value={condition.data_field}
+        onChange={onChangeDataField}
+      ></Input>
+      <Select
+        mx="4"
+        w="150px"
+        value={condition.operator.value}
+        onChange={onChangeOperator}
+      >
         {operations?.map((operator) => {
           return (
             <option key={operator.value} value={operator.value}>
@@ -79,10 +105,12 @@ function Condition({ condition }: { condition: ConditionInterface }) {
         })}
       </Select>
       <Input
+        mx="4"
+        w="150px"
         value={condition.filter_value}
         onChange={onChangeFilterValue}
       ></Input>
-    </HStack>
+    </Flex>
   );
 }
 
