@@ -9,20 +9,30 @@ import {
   operationsAtom,
   ConditionInterface,
 } from "../../store/yieldManager";
+import { getDataFieldsBySurvey } from "../../queries/getDataFieldsBySurvey";
+import axios from "axios";
 
 function Condition({ condition }: { condition: ConditionInterface }) {
   const [conditionGroups, setConditionGroups] = useAtom(conditionGroupsAtom);
   const [operations, setOperations] = useAtom(operationsAtom);
+  const [dataFields, setDataFields] = useState<any>([]);
   const [options, setOptions] = useState<string[]>([]);
 
-  useEffect(()=>{
-    if(condition.type === 'survey_js_answer'){
+  async function getSurveyDataFields() {
+    if (condition.survey) {
+      const data = await getDataFieldsBySurvey(condition.survey);
+      setDataFields(data);
+    }
+  }
+
+  useEffect(() => {
+    if (condition.type === "survey_js_answer") {
       const survey = condition.survey;
-      if(survey){
-        
+      if (survey) {
+        getSurveyDataFields();
       }
     }
-  }, [condition])
+  }, [condition]);
 
   function onChangeDataField(e: any) {
     const updatedConditionGroups = conditionGroups?.map((group) => {
@@ -79,17 +89,18 @@ function Condition({ condition }: { condition: ConditionInterface }) {
   }
 
   return (
-    <Flex w="100%">
+    <Flex w="100%" alignItems="center">
       <ConditionType condition={condition} />
       {condition.type === "survey_js_answer" && (
         <FilterOnSurveySelector condition={condition} />
       )}
-      <Input
+      <Autocomplete
         mx="4"
         w="150px"
+        options={dataFields}
         value={condition.data_field}
         onChange={onChangeDataField}
-      ></Input>
+      ></Autocomplete>
       <Select
         mx="4"
         w="150px"

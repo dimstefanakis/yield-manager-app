@@ -46,15 +46,15 @@ export const conditionGroupsAtom = atom<ConditionGroupInterface[] | null>([
     childrenMatchType: "and",
     conditions: [
       {
-        data_field: "age",
+        data_field: "",
         operator: {
-          value: "eq",
-          label: "Equal to",
+          value: "",
+          label: "",
         },
-        filter_value: "18",
-        filter_end_value: "18",
+        filter_value: "",
+        filter_end_value: "",
         type: "survey_js_answer",
-        survey: "survey1",
+        survey: "",
       },
     ],
     survey: null,
